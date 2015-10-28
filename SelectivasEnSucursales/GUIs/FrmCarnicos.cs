@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using DevExpress.XtraPrinting;
-using DevExpress.XtraPrintingLinks;
-using DevExpress.XtraGrid.Views.Base;
 using SelectivasEnSucursales.Modelos;
+using SelectivasEnSucursales.Modelos.SqliteDal;
+using SelectivasEnSucursales.Reporte;
 
 namespace SelectivasEnSucursales.GUIs
 {
@@ -23,6 +21,7 @@ namespace SelectivasEnSucursales.GUIs
         private List<Etiqueta> lstEtiquetas;
         private List<SegConService.EtiquetasGrid> lstEtiquetasACC;
         private List<WebServiceFriolala.EtiquetasGrid> lstEtiquetasFriolala;
+        
 
         // Creando componentes de impresión.
         PrintingSystem SistemaImpresion = new PrintingSystem();
@@ -31,11 +30,7 @@ namespace SelectivasEnSucursales.GUIs
         public FrmCarnicos()
         {
             InitializeComponent();
-        }
-
-        private void btnConfigurar_Click(object sender, EventArgs e)
-        {
-            new FrmConfiguracionCarnicos().ShowDialog();
+            lstEtiquetas = new List<Etiqueta>();
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -153,37 +148,21 @@ namespace SelectivasEnSucursales.GUIs
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            ImprimirGrid();
+            Imprimir();
         }
-        private void ImprimirGrid()
+        private void Imprimir()
         {
-            /******************************/
-            // Creamos el Header
-            PageHeaderArea Header = new PageHeaderArea();
-            ComponenteImpresion.Images.Add(Image.FromFile(Environment.CurrentDirectory+"\\logomini.png"));
-            Header.Content.AddRange(new string[] { "[Image 0]", Properties.Settings.Default.Sucursal, "[Time Printed]" });
-            Header.LineAlignment = BrickAlignment.Far;
-            /******************************/
-
-            /******************************/
-            //Creamos el Footer
-            string izquierda = "Paginas: [Page # of Pages #]";
-            string centro = "Usuario: [User Name]";
-            string derecha = "Fecha: [Date Printed]";
-            PageFooterArea Footer = new PageFooterArea();
-            Footer.Content.AddRange(new string[] { izquierda, centro, derecha });
-            Footer.LineAlignment = BrickAlignment.Near;
-            /*****************************/
-
-            /******************************/
-            //Agregar el Grid al documento
-            ComponenteImpresion.Component = gridEtiquetas;
-            //Agregar el header y el footer al documento
-            ComponenteImpresion.PageHeaderFooter = new PageHeaderFooter(Header, Footer);
-            //Crear el documento
-            ComponenteImpresion.CreateDocument(SistemaImpresion);
-            //Mostrar la vista previa para imprimir
-            ComponenteImpresion.ShowPreviewDialog();
+            if (txbCliente.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Error en el campo \"Cliente\"","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                Impresion Reporte = new Impresion();
+                Reporte.sCliente = txbCliente.Text;
+                Reporte.DataSource = lstEtiquetas.Distinct().ToList();
+                Reporte.ShowPreviewDialog();
+            }
         }
 
         private void bgwConsultaFriolala_DoWork(object sender, DoWorkEventArgs e)
@@ -293,5 +272,104 @@ namespace SelectivasEnSucursales.GUIs
             tvTarimas.SelectedNode = SelectedNode;
         }
 
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            new FrmAgregarArticulos().ShowDialog();
+            llenarComboArticulosExtra();
+        }
+
+        private void FrmCarnicos_Load(object sender, EventArgs e)
+        {
+            llenarComboArticulosExtra();
+        }
+
+        private void llenarComboArticulosExtra()
+        {
+            SqliteDAL DAL = new SqliteDAL();
+            List<ArticuloExtra> lstArticulosExtra = DAL.ObtenerArticulosExtra();
+
+            cbArticulosExtras.DataSource = lstArticulosExtra;
+            cbArticulosExtras.DisplayMember = "nombre";
+            cbArticulosExtras.ValueMember = "clave";
+        }
+
+        private void btnAgregarAlGrid_Click(object sender, EventArgs e)
+        {
+            if (txbCantidad.Text.Trim() == string.Empty)
+                MessageBox.Show("Error en la cantidad...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (txbPeso.Text.Trim() == string.Empty)
+                MessageBox.Show("Error en el peso...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                AgregarAlGrid();
+        }
+        private void AgregarAlGrid()
+        {
+            /* Obtener Articulo del Combobox*/
+            ArticuloExtra artiEx = (ArticuloExtra)cbArticulosExtras.SelectedItem;
+
+            /* Obtener cantidades */
+            int iCantidad = Convert.ToInt32(txbCantidad.Text);
+            decimal dPeso = Convert.ToDecimal(txbPeso.Text);
+
+            Etiqueta nuevaEntrada;
+            for (int i = 0; i < iCantidad; i++)
+            {
+                nuevaEntrada = new Etiqueta();
+                nuevaEntrada.NumeroDeEtiqueta = "Sin Etiqueta " + (i + 1);
+                nuevaEntrada.ClaveNombre = artiEx.Clave + " - " + artiEx.Nombre;
+                nuevaEntrada.Cantidad = Convert.ToDecimal(txbPeso.Text);
+                nuevaEntrada.FechaDeEmpaque = null;
+                nuevaEntrada.FechaDeCaducidad = null;
+                nuevaEntrada.Unidad = "KG";
+                lstEtiquetas.Add(nuevaEntrada);
+            }
+
+            gridEtiquetas.DataSource = lstEtiquetas;
+            gridEtiquetas.RefreshDataSource();
+            gvEtiquetas.BestFitColumns();
+        }
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            lstEtiquetas = new List<Etiqueta>();
+            gridEtiquetas.DataSource = lstEtiquetas;
+            gridEtiquetas.RefreshDataSource();
+        }
+
+        private void txbCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txbPeso_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            new FrmConfiguracionCarnicos().ShowDialog();
+        }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            pictureBox1.Size = new System.Drawing.Size(50, 50);
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox1.Size = new System.Drawing.Size(48, 48);
+        }
     }
 }

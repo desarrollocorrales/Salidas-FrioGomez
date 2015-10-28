@@ -7,3 +7,7 @@ G:\Github\Selectivas-Sucursales\ClasesDeConfiguracion\bin\Debug\ClasesDeConfigur
 G:\Github\Selectivas-Sucursales\ClasesDeConfiguracion\bin\Debug\ClasesDeConfiguracion.pdb
 G:\Github\Selectivas-Sucursales\ClasesDeConfiguracion\obj\Debug\ClasesDeConfiguracion.dll
 G:\Github\Selectivas-Sucursales\ClasesDeConfiguracion\obj\Debug\ClasesDeConfiguracion.pdb
+G:\Github\Salidas-FrioGomez\ClasesDeConfiguracion\bin\Debug\ClasesDeConfiguracion.dll
+G:\Github\Salidas-FrioGomez\ClasesDeConfiguracion\bin\Debug\ClasesDeConfiguracion.pdb
+G:\Github\Salidas-FrioGomez\ClasesDeConfiguracion\obj\Debug\ClasesDeConfiguracion.dll
+G:\Github\Salidas-FrioGomez\ClasesDeConfiguracion\obj\Debug\ClasesDeConfiguracion.pdb

@@ -35,7 +35,7 @@ namespace SelectivasEnSucursales.SegConService {
         
         /// <remarks/>
         public ServicioWeb() {
-            this.Url = global::SelectivasEnSucursales.Properties.Settings.Default.SelectivasEnSucursales_SegConService_SegConWebService;
+            this.Url = global::SelectivasEnSucursales.Properties.Settings.Default.SelectivasEnSucursales_SegConService_ServicioWeb;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -130,6 +130,16 @@ namespace SelectivasEnSucursales.SegConService {
         
         private string numeroDeEtiquetaField;
         
+        private string tipoEtiquetaField;
+        
+        private System.Nullable<int> idProveedorField;
+        
+        private System.Nullable<long> idLoteField;
+        
+        private System.Nullable<long> idPedidoField;
+        
+        private string claveField;
+        
         private string claveNombreField;
         
         private System.DateTime fechaDeEmpaqueField;
@@ -140,6 +150,10 @@ namespace SelectivasEnSucursales.SegConService {
         
         private string unidadField;
         
+        private System.Nullable<long> piezasField;
+        
+        private System.Nullable<System.DateTime> fechaDeRecepcionField;
+        
         /// <comentarios/>
         public string NumeroDeEtiqueta {
             get {
@@ -147,6 +161,59 @@ namespace SelectivasEnSucursales.SegConService {
             }
             set {
                 this.numeroDeEtiquetaField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string TipoEtiqueta {
+            get {
+                return this.tipoEtiquetaField;
+            }
+            set {
+                this.tipoEtiquetaField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> IdProveedor {
+            get {
+                return this.idProveedorField;
+            }
+            set {
+                this.idProveedorField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<long> IdLote {
+            get {
+                return this.idLoteField;
+            }
+            set {
+                this.idLoteField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<long> IdPedido {
+            get {
+                return this.idPedidoField;
+            }
+            set {
+                this.idPedidoField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public string Clave {
+            get {
+                return this.claveField;
+            }
+            set {
+                this.claveField = value;
             }
         }
         
@@ -197,6 +264,28 @@ namespace SelectivasEnSucursales.SegConService {
             }
             set {
                 this.unidadField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<long> Piezas {
+            get {
+                return this.piezasField;
+            }
+            set {
+                this.piezasField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> FechaDeRecepcion {
+            get {
+                return this.fechaDeRecepcionField;
+            }
+            set {
+                this.fechaDeRecepcionField = value;
             }
         }
     }

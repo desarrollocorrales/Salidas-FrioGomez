@@ -73,9 +73,9 @@ namespace SelectivasEnSucursales.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap groceries {
+        internal static System.Drawing.Bitmap Friolala {
             get {
-                object obj = ResourceManager.GetObject("groceries", resourceCulture);
+                object obj = ResourceManager.GetObject("Friolala", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace SelectivasEnSucursales.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap meats {
+        internal static System.Drawing.Bitmap ios_settings_icon {
             get {
-                object obj = ResourceManager.GetObject("meats", resourceCulture);
+                object obj = ResourceManager.GetObject("ios-settings-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

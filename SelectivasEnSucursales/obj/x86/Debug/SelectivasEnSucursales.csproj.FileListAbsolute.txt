@@ -50,3 +50,6 @@ G:\Github\Selectivas-Sucursales\SelectivasEnSucursales\obj\x86\Debug\SelectivasE
 G:\Github\Selectivas-Sucursales\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSucursales.exe.licenses
 G:\Github\Selectivas-Sucursales\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSucursales.exe
 G:\Github\Selectivas-Sucursales\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSucursales.pdb
+G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\bin\Debug\SelectivasEnSucursales.exe.config
+G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSucursales.exe
+G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSucursales.pdb

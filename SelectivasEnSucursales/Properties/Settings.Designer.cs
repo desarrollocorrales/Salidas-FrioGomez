@@ -25,42 +25,7 @@ namespace SelectivasEnSucursales.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::ClasesDeConfiguracion.ConfiguracionFB Configuracion {
-            get {
-                return ((global::ClasesDeConfiguracion.ConfiguracionFB)(this["Configuracion"]));
-            }
-            set {
-                this["Configuracion"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Almacen {
-            get {
-                return ((int)(this["Almacen"]));
-            }
-            set {
-                this["Almacen"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Sucursal")]
-        public string Sucursal {
-            get {
-                return ((string)(this["Sucursal"]));
-            }
-            set {
-                this["Sucursal"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://servidorx:82/SegConwebServices/ServicioWeb.asmx")]
         public string URLWebService {
             get {
                 return ((string)(this["URLWebService"]));
@@ -73,32 +38,32 @@ namespace SelectivasEnSucursales.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://servidorx:82/SegCoServices/ServicioWeb.asmx")]
-        public string SelectivasEnSucursales_SegConService_SegConWebService {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://servidorx:82/SegConwebServices/ServicioWeb.asmx")]
+        public string SelectivasEnSucursales_SegConService_ServicioWeb {
             get {
-                return ((string)(this["SelectivasEnSucursales_SegConService_SegConWebService"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://servidor:84/SegConFriolala/ServicioWeb.asmx")]
-        public string URLWebServiceFriolala {
-            get {
-                return ((string)(this["URLWebServiceFriolala"]));
-            }
-            set {
-                this["URLWebServiceFriolala"] = value;
+                return ((string)(this["SelectivasEnSucursales_SegConService_ServicioWeb"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://200.23.18.85:84/segconfriolala/ServicioWeb.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://friolalamatriz.redesdurango.com:84/SegConFriolala/Servicioweb.asmx")]
         public string SelectivasEnSucursales_WebServiceFriolala_ServicioWeb {
             get {
                 return ((string)(this["SelectivasEnSucursales_WebServiceFriolala_ServicioWeb"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://friolalamatriz.redesdurango.com:84/SegConFriolala/Servicioweb.asmx")]
+        public string URLWebServiceFriolala {
+            get {
+                return ((string)(this["URLWebServiceFriolala"]));
+            }
+            set {
+                this["URLWebServiceFriolala"] = value;
             }
         }
     }

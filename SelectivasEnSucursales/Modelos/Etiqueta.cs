@@ -9,8 +9,8 @@ namespace SelectivasEnSucursales.Modelos
     {
         public string NumeroDeEtiqueta { set; get; }
         public string ClaveNombre { set; get; }
-        public DateTime FechaDeEmpaque { set; get; }
-        public DateTime FechaDeCaducidad { set; get; }
+        public DateTime? FechaDeEmpaque { set; get; }
+        public DateTime? FechaDeCaducidad { set; get; }
         public decimal Cantidad { set; get; }
         public string Unidad { set; get; }
     }
