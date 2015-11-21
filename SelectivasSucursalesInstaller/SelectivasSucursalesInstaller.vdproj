@@ -1390,7 +1390,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Salidas FrioGomez"
         "ProductCode" = "8:{1A9F4987-6707-406A-A0B7-FC15E043B3F4}"
-        "PackageCode" = "8:{3BE69570-DEA8-4965-A482-14E8DFA07CDD}"
+        "PackageCode" = "8:{D3AEFDEF-23F3-4E71-9F8D-1442AC6CB810}"
         "UpgradeCode" = "8:{052C918A-9E75-425F-923F-DE8413F15C3A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

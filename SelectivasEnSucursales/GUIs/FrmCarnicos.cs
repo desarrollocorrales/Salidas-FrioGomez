@@ -160,7 +160,9 @@ namespace SelectivasEnSucursales.GUIs
             {
                 Impresion Reporte = new Impresion();
                 Reporte.sCliente = txbCliente.Text;
-                Reporte.DataSource = lstEtiquetas.Distinct().ToList();
+                var lstSource = ((List<Etiqueta>)gridEtiquetas.DataSource);
+                //Reporte.DataSource = lstEtiquetas.Distinct().ToList();
+                Reporte.DataSource = lstSource;
                 Reporte.ShowPreviewDialog();
             }
         }
@@ -304,6 +306,9 @@ namespace SelectivasEnSucursales.GUIs
         }
         private void AgregarAlGrid()
         {
+            /* Obtener los datos del grid */
+            var lstSource = ((List<Etiqueta>)gridEtiquetas.DataSource);
+
             /* Obtener Articulo del Combobox*/
             ArticuloExtra artiEx = (ArticuloExtra)cbArticulosExtras.SelectedItem;
 
@@ -321,10 +326,10 @@ namespace SelectivasEnSucursales.GUIs
                 nuevaEntrada.FechaDeEmpaque = null;
                 nuevaEntrada.FechaDeCaducidad = null;
                 nuevaEntrada.Unidad = "KG";
-                lstEtiquetas.Add(nuevaEntrada);
+                lstSource.Add(nuevaEntrada);
             }
 
-            gridEtiquetas.DataSource = lstEtiquetas;
+            gridEtiquetas.DataSource = lstSource;
             gridEtiquetas.RefreshDataSource();
             gvEtiquetas.BestFitColumns();
         }
