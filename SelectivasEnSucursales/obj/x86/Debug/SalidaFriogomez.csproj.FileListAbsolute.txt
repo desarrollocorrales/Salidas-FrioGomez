@@ -16,3 +16,5 @@ G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSuc
 G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSucursales.pdb
 G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\bin\Debug\DB\SalidasFrioGomez.sdf
 G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\bin\Debug\SalidasFrioGomez.sdf
+G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSucursales.GUIs.FrmRecepciones.resources
+G:\Github\Salidas-FrioGomez\SelectivasEnSucursales\obj\x86\Debug\SelectivasEnSucursales.Reporte.Recepcion.resources

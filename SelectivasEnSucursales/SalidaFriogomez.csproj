@@ -97,6 +97,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SalidasFrioGomez.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GUIs\FrmRecepciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\FrmRecepciones.Designer.cs">
+      <DependentUpon>FrmRecepciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIs\FrmAgregarArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Reporte\Recepcion.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporte\Recepcion.Designer.cs">
+      <DependentUpon>Recepcion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporte\Impresion.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -143,6 +155,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GUIs\FrmRecepciones.resx">
+      <DependentUpon>FrmRecepciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUIs\FrmAgregarArticulos.resx">
       <DependentUpon>FrmAgregarArticulos.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,6 +174,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\Recepcion.resx">
+      <DependentUpon>Recepcion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte\Impresion.resx">
       <DependentUpon>Impresion.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +188,7 @@
       <LastGenOutput>SalidasFrioGomez.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Properties\DataSources\SelectivasEnSucursales.AccService.etiquetas.datasource" />
+    <None Include="Properties\DataSources\SelectivasEnSucursales.DB.SalidaEntities.datasource" />
     <None Include="Properties\DataSources\SelectivasEnSucursales.Modelos.Articulo.datasource" />
     <None Include="Properties\DataSources\SelectivasEnSucursales.Modelos.Etiqueta.datasource" />
     <None Include="Properties\Settings.settings">
@@ -206,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ios-settings-icon.jpg" />
+    <None Include="printer2.png" />
     <Content Include="SalidasFrioGomez.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -12,7 +12,7 @@ using SelectivasEnSucursales.Reporte;
 
 namespace SelectivasEnSucursales.GUIs
 {
-    public partial class FrmCarnicos : Form
+    public partial class FrmRecepciones : Form
     {
         private TimeSpan tiempoConsultaInicial, tiempoConsultaFinal;
         private string sError;
@@ -27,7 +27,7 @@ namespace SelectivasEnSucursales.GUIs
         PrintingSystem SistemaImpresion = new PrintingSystem();
         PrintableComponentLink ComponenteImpresion = new PrintableComponentLink();
 
-        public FrmCarnicos()
+        public FrmRecepciones()
         {
             InitializeComponent();
             lstEtiquetas = new List<Etiqueta>();
@@ -152,17 +152,10 @@ namespace SelectivasEnSucursales.GUIs
         }
         private void Imprimir()
         {
-            if (txbCliente.Text.Trim() == string.Empty)
-            {
-                MessageBox.Show("Error en el campo \"Cliente\"","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                Impresion Reporte = new Impresion();
-                Reporte.sCliente = txbCliente.Text;
-                Reporte.DataSource = lstEtiquetas.Distinct().ToList();
-                Reporte.ShowPreviewDialog();
-            }
+            Recepcion Reporte = new Recepcion();
+            Reporte.sCliente = string.Empty;
+            Reporte.DataSource = lstEtiquetas.Distinct().ToList();
+            Reporte.ShowPreviewDialog();
         }
 
         private void bgwConsultaFriolala_DoWork(object sender, DoWorkEventArgs e)
@@ -272,63 +265,6 @@ namespace SelectivasEnSucursales.GUIs
             tvTarimas.SelectedNode = SelectedNode;
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            new FrmAgregarArticulos().ShowDialog();
-            llenarComboArticulosExtra();
-        }
-
-        private void FrmCarnicos_Load(object sender, EventArgs e)
-        {
-            llenarComboArticulosExtra();
-        }
-
-        private void llenarComboArticulosExtra()
-        {
-            SqliteDAL DAL = new SqliteDAL();
-            List<ArticuloExtra> lstArticulosExtra = DAL.ObtenerArticulosExtra();
-
-            cbArticulosExtras.DataSource = lstArticulosExtra;
-            cbArticulosExtras.DisplayMember = "nombre";
-            cbArticulosExtras.ValueMember = "clave";
-        }
-
-        private void btnAgregarAlGrid_Click(object sender, EventArgs e)
-        {
-            if (txbCantidad.Text.Trim() == string.Empty)
-                MessageBox.Show("Error en la cantidad...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else if (txbPeso.Text.Trim() == string.Empty)
-                MessageBox.Show("Error en el peso...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
-                AgregarAlGrid();
-        }
-        private void AgregarAlGrid()
-        {
-            /* Obtener Articulo del Combobox*/
-            ArticuloExtra artiEx = (ArticuloExtra)cbArticulosExtras.SelectedItem;
-
-            /* Obtener cantidades */
-            int iCantidad = Convert.ToInt32(txbCantidad.Text);
-            decimal dPeso = Convert.ToDecimal(txbPeso.Text);
-
-            Etiqueta nuevaEntrada;
-            for (int i = 0; i < iCantidad; i++)
-            {
-                nuevaEntrada = new Etiqueta();
-                nuevaEntrada.NumeroDeEtiqueta = "Sin Etiqueta " + (i + 1);
-                nuevaEntrada.ClaveNombre = artiEx.Clave + " - " + artiEx.Nombre;
-                nuevaEntrada.Cantidad = Convert.ToDecimal(txbPeso.Text);
-                nuevaEntrada.FechaDeEmpaque = null;
-                nuevaEntrada.FechaDeCaducidad = null;
-                nuevaEntrada.Unidad = "KG";
-                lstEtiquetas.Add(nuevaEntrada);
-            }
-
-            gridEtiquetas.DataSource = lstEtiquetas;
-            gridEtiquetas.RefreshDataSource();
-            gvEtiquetas.BestFitColumns();
-        }
-
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             lstEtiquetas = new List<Etiqueta>();
@@ -365,11 +301,13 @@ namespace SelectivasEnSucursales.GUIs
         private void pictureBox1_MouseHover(object sender, EventArgs e)
         {
             pictureBox1.Size = new System.Drawing.Size(50, 50);
+            pictureBox1.Location = new System.Drawing.Point(4, 4);
         }
 
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
         {
             pictureBox1.Size = new System.Drawing.Size(48, 48);
+            pictureBox1.Location = new System.Drawing.Point(5, 5);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
