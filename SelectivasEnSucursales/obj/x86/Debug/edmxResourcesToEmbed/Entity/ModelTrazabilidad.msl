@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TrazabilidadModelStoreContainer" CdmEntityContainer="TrazabilidadEntities">
+    <EntitySetMapping Name="trazabilidad">
+      <EntityTypeMapping TypeName="TrazabilidadModel.trazabilidad">
+        <MappingFragment StoreEntitySet="trazabilidad">
+          <ScalarProperty Name="numero_etiqueta" ColumnName="numero_etiqueta" />
+          <ScalarProperty Name="folio_salida" ColumnName="folio_salida" />
+          <ScalarProperty Name="folio_compra" ColumnName="folio_compra" />
+          <ScalarProperty Name="tipo_salida" ColumnName="tipo_salida" />
+          <ScalarProperty Name="fecha_embarque" ColumnName="fecha_embarque" />
+          <ScalarProperty Name="propietario" ColumnName="propietario" />
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

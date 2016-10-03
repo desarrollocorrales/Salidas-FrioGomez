@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrazabilidadModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="TrazabilidadModelStoreContainer">
+    <EntitySet Name="trazabilidad" EntityType="TrazabilidadModel.Store.trazabilidad" store:Type="Tables" Schema="seguimiento_friolala" />
+  </EntityContainer>
+  <EntityType Name="trazabilidad">
+    <Key>
+      <PropertyRef Name="numero_etiqueta" />
+    </Key>
+    <Property Name="numero_etiqueta" Type="varchar" Nullable="false" MaxLength="14" />
+    <Property Name="folio_salida" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="folio_compra" Type="varchar" MaxLength="20" />
+    <Property Name="tipo_salida" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="fecha_embarque" Type="date" Nullable="false" />
+    <Property Name="propietario" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="cliente" Type="varchar" Nullable="false" MaxLength="150" />
+  </EntityType>
+</Schema>

@@ -203,13 +203,13 @@
             // xrLabel20
             // 
             this.xrLabel20.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(222.4827F, 3.739899E-05F);
+            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(244.3577F, 3.178914E-05F);
             this.xrLabel20.Name = "xrLabel20";
             this.xrLabel20.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel20.SizeF = new System.Drawing.SizeF(517.5172F, 44.26736F);
+            this.xrLabel20.SizeF = new System.Drawing.SizeF(495.6422F, 44.26736F);
             this.xrLabel20.StylePriority.UseFont = false;
             this.xrLabel20.StylePriority.UseTextAlignment = false;
-            this.xrLabel20.Text = "Recepción de Mercancia";
+            this.xrLabel20.Text = "Salidas de Mercancia";
             this.xrLabel20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // lblHora

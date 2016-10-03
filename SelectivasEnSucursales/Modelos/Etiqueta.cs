@@ -13,5 +13,7 @@ namespace SelectivasEnSucursales.Modelos
         public DateTime? FechaDeCaducidad { set; get; }
         public decimal Cantidad { set; get; }
         public string Unidad { set; get; }
+        public long? IdPedido { set; get; }
+        public string EtiquetaTarima { set; get; }
     }
 }

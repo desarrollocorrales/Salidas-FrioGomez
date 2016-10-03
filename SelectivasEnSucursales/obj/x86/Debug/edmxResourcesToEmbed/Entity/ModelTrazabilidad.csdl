@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrazabilidadModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="TrazabilidadEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="trazabilidad" EntityType="TrazabilidadModel.trazabilidad" />
+  </EntityContainer>
+  <EntityType Name="trazabilidad">
+    <Key>
+      <PropertyRef Name="numero_etiqueta" />
+    </Key>
+    <Property Name="numero_etiqueta" Type="String" Nullable="false" MaxLength="14" Unicode="false" FixedLength="false" />
+    <Property Name="folio_salida" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="folio_compra" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="tipo_salida" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="fecha_embarque" Type="DateTime" Nullable="false" />
+    <Property Name="propietario" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="cliente" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+  </EntityType>
+</Schema>

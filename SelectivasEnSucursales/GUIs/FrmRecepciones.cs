@@ -9,6 +9,8 @@ using DevExpress.XtraPrinting;
 using SelectivasEnSucursales.Modelos;
 using SelectivasEnSucursales.Modelos.SqliteDal;
 using SelectivasEnSucursales.Reporte;
+using SelectivasEnSucursales.Entity;
+using System.Data;
 
 namespace SelectivasEnSucursales.GUIs
 {
@@ -19,6 +21,7 @@ namespace SelectivasEnSucursales.GUIs
         private string sEtiquetas;
         private string sArchivoDeEscaneo;
         private List<Etiqueta> lstEtiquetas;
+        private List<Etiqueta> lstEtiquetasAImprimir;
         private List<SegConService.EtiquetasGrid> lstEtiquetasACC;
         private List<WebServiceFriolala.EtiquetasGrid> lstEtiquetasFriolala;
         
@@ -114,6 +117,8 @@ namespace SelectivasEnSucursales.GUIs
                     etiqueta.FechaDeCaducidad = DatosEtiqueta.FechaDeCaducidad;
                     etiqueta.Cantidad = DatosEtiqueta.Cantidad;
                     etiqueta.Unidad = DatosEtiqueta.Unidad;
+                    etiqueta.IdPedido = DatosEtiqueta.IdPedido;
+                    etiqueta.EtiquetaTarima = DatosEtiqueta.EtiquetaTarima;
 
                     lstEtiquetas.Add(etiqueta);
                 }
@@ -132,6 +137,10 @@ namespace SelectivasEnSucursales.GUIs
                 {
                     gridEtiquetas.DataSource = lstEtiquetas;
                     gvEtiquetas.BestFitColumns();
+
+                    gridRastreabilidad.DataSource = lstEtiquetas;
+                    gvRastreabilidad.BestFitColumns();
+
                     pbCargando.Visible = false;
                     btnConsultar.Enabled = true;
                 }
@@ -154,7 +163,8 @@ namespace SelectivasEnSucursales.GUIs
         {
             Recepcion Reporte = new Recepcion();
             Reporte.sCliente = string.Empty;
-            Reporte.DataSource = lstEtiquetas.Distinct().ToList();
+            //Reporte.DataSource = lstEtiquetas.Distinct().ToList();
+            Reporte.DataSource = lstEtiquetasAImprimir;
             Reporte.ShowPreviewDialog();
         }
 
@@ -177,6 +187,8 @@ namespace SelectivasEnSucursales.GUIs
                     etiqueta.FechaDeCaducidad = DatosEtiqueta.FechaDeCaducidad;
                     etiqueta.Cantidad = DatosEtiqueta.Cantidad;
                     etiqueta.Unidad = DatosEtiqueta.Unidad;
+                    etiqueta.IdPedido = DatosEtiqueta.IdPedido;
+                    etiqueta.EtiquetaTarima = DatosEtiqueta.EtiquetaTarima;
 
                     lstEtiquetas.Add(etiqueta);
                 }
@@ -196,6 +208,10 @@ namespace SelectivasEnSucursales.GUIs
                 {
                     gridEtiquetas.DataSource = lstEtiquetas;
                     gvEtiquetas.BestFitColumns();
+
+                    gridRastreabilidad.DataSource = lstEtiquetas;
+                    gvRastreabilidad.BestFitColumns();
+
                     pbCargando.Visible = false;
                     btnConsultar.Enabled = true;
                 }
@@ -251,11 +267,17 @@ namespace SelectivasEnSucursales.GUIs
             foreach (string numeroetiqueta in numerosdeetiquetas)
             {
                 lstEtiquetasAMostrar.Add(lstEtiquetas.FirstOrDefault(o => o.NumeroDeEtiqueta == numeroetiqueta));
+                lstEtiquetasAMostrar.AddRange(lstEtiquetas.FindAll(o => o.EtiquetaTarima == numeroetiqueta));
             }
 
             lstEtiquetasAMostrar.RemoveAll(o=>o == null);
+            lstEtiquetasAMostrar = lstEtiquetasAMostrar.Distinct().ToList();
+            lstEtiquetasAImprimir = lstEtiquetasAMostrar;
             gridEtiquetas.DataSource = lstEtiquetasAMostrar;
             gvEtiquetas.BestFitColumns();
+
+            gridRastreabilidad.DataSource = lstEtiquetasAMostrar;
+            gvRastreabilidad.BestFitColumns();
         }
 
         private void tvTarimas_AfterSelect(object sender, TreeViewEventArgs e)
@@ -293,26 +315,120 @@ namespace SelectivasEnSucursales.GUIs
             }
         }
 
-        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        private void btnConfigurar_Click(object sender, EventArgs e)
         {
             new FrmConfiguracionCarnicos().ShowDialog();
         }
 
-        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        private void FrmRecepciones_Load(object sender, EventArgs e)
         {
-            pictureBox1.Size = new System.Drawing.Size(50, 50);
-            pictureBox1.Location = new System.Drawing.Point(4, 4);
+            IniciarControles();
+        }
+        private void IniciarControles()
+        {
+            cmbTipoSalida.SelectedIndex = 0;
         }
 
-        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
-            pictureBox1.Size = new System.Drawing.Size(48, 48);
-            pictureBox1.Location = new System.Drawing.Point(5, 5);
+            try
+            {
+                if (ValidarGuardar() == true)
+                    GuardarTrazabilidad();
+            }
+            catch (Exception ex)
+            {
+                MostrarExcepcion(ex);
+            }
+        }
+        private void GuardarTrazabilidad()
+        {
+            trazabilidad traza;
+            var srcEtiquetas = (List<Etiqueta>)gridRastreabilidad.DataSource;
+            TrazabilidadEntities Contexto = new TrazabilidadEntities(Properties.Settings.Default.EntityString);
+
+            Contexto.Connection.Open();
+            IDbTransaction Transaccion = Contexto.Connection.BeginTransaction();
+            try
+            {
+                foreach (Etiqueta e in srcEtiquetas)
+                {
+                    traza = new trazabilidad();
+                    traza.numero_etiqueta = e.NumeroDeEtiqueta;
+                    traza.folio_salida = txbFolioSalida.Text.ToUpper();
+                    traza.folio_compra = txbFolioCompra.Text.ToUpper();
+                    traza.tipo_salida = cmbTipoSalida.SelectedItem.ToString().ToUpper();
+                    traza.fecha_embarque = dtpFechaEmbarque.Value;
+                    traza.propietario = txbPropietario.Text.ToUpper();
+                    traza.cliente = txbCliente.Text.ToUpper();
+                    Contexto.trazabilidad.AddObject(traza);
+                }
+                
+                Contexto.SaveChanges();
+
+                Transaccion.Commit();
+                Contexto.Connection.Close();
+                
+                MessageBox.Show("¡¡¡Los datos fueron guardados con éxito!!!", "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                var auxEx = ex;
+                while (auxEx != null)
+                {
+                    sb.AppendLine(auxEx.Message + Environment.NewLine);
+                    auxEx = auxEx.InnerException;
+                }
+                sb = sb.Replace("Duplicate entry", "Ya fue registrada la trazabilidad para la etiqueta ");
+                sb = sb.Replace("for key 'PRIMARY'", string.Empty);
+                
+                Transaccion.Rollback();
+                Contexto.Connection.Close();
+
+                MessageBox.Show(sb.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private bool ValidarGuardar()
+        {
+            if (gvRastreabilidad.DataRowCount == 0)
+                return false;
+
+            if (txbFolioSalida.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Debe ingresar el folio del documento de salida...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (txbPropietario.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Debe ingresar el propietario de la mercancia...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (txbCliente.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Debe ingresar el cliente...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            DialogResult dr = MessageBox.Show("¿Los datos son correctos?", "Validar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dr == DialogResult.No)
+                return false;
+
+            return true;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void MostrarExcepcion(Exception ex)
         {
+            StringBuilder sb = new StringBuilder();
+            var exType = ex.GetType().ToString();
+            while (ex != null)
+            {
+                sb.AppendLine(ex.Message + " --> ");
+                ex = ex.InnerException;
+            }
 
+            MessageBox.Show(sb.ToString(), exType, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

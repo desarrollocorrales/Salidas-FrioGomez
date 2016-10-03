@@ -73,6 +73,7 @@
     <Reference Include="DevExpress.XtraPrinting.v11.1, Version=11.1.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v11.1, Version=11.1.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraRichEdit.v11.1, Version=11.1.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -96,6 +97,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SalidasFrioGomez.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ModelTrazabilidad.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelTrazabilidad.edmx</DependentUpon>
     </Compile>
     <Compile Include="GUIs\FrmRecepciones.cs">
       <SubType>Form</SubType>
@@ -187,8 +193,14 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SalidasFrioGomez.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Entity\ModelTrazabilidad.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelTrazabilidad.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\SelectivasEnSucursales.AccService.etiquetas.datasource" />
     <None Include="Properties\DataSources\SelectivasEnSucursales.DB.SalidaEntities.datasource" />
+    <None Include="Properties\DataSources\SelectivasEnSucursales.Entity.TrazabilidadEntities.datasource" />
     <None Include="Properties\DataSources\SelectivasEnSucursales.Modelos.Articulo.datasource" />
     <None Include="Properties\DataSources\SelectivasEnSucursales.Modelos.Etiqueta.datasource" />
     <None Include="Properties\Settings.settings">

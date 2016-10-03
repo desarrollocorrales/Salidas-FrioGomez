@@ -14,5 +14,20 @@
     <Setting Name="URLWebServiceFriolala" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://friolalamatriz.redesdurango.com:84/SegConFriolala/Servicioweb.asmx</Value>
     </Setting>
+    <Setting Name="EntityString" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DB_Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DB_User" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DB_Pass" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DB_Port" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
