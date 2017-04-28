@@ -60,8 +60,6 @@
             this.colUnidad = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIdPedido = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txbFolioCompra = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.dtpFechaEmbarque = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.txbCliente = new System.Windows.Forms.TextBox();
@@ -432,7 +430,7 @@
             this.gvEtiquetas.GroupCount = 1;
             this.gvEtiquetas.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "NumeroDeEtiqueta", null, ""),
-            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Cantidad", this.colCantidad, "")});
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Cantidad", this.colCantidad, "{0:#,0.00}")});
             this.gvEtiquetas.Name = "gvEtiquetas";
             this.gvEtiquetas.OptionsBehavior.Editable = false;
             this.gvEtiquetas.OptionsView.EnableAppearanceEvenRow = true;
@@ -502,8 +500,10 @@
             // 
             // colIdPedido
             // 
+            this.colIdPedido.AppearanceCell.Options.UseTextOptions = true;
+            this.colIdPedido.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colIdPedido.AppearanceHeader.Options.UseTextOptions = true;
-            this.colIdPedido.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.colIdPedido.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.colIdPedido.Caption = "Lote";
             this.colIdPedido.FieldName = "IdPedido";
             this.colIdPedido.Name = "colIdPedido";
@@ -512,8 +512,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.txbFolioCompra);
-            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.dtpFechaEmbarque);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.txbCliente);
@@ -534,30 +532,12 @@
             this.tabPage2.Text = "Rastreabilidad";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // txbFolioCompra
-            // 
-            this.txbFolioCompra.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txbFolioCompra.Location = new System.Drawing.Point(273, 6);
-            this.txbFolioCompra.Name = "txbFolioCompra";
-            this.txbFolioCompra.Size = new System.Drawing.Size(200, 26);
-            this.txbFolioCompra.TabIndex = 25;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(172, 9);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(95, 18);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "Folio compra:";
-            // 
             // dtpFechaEmbarque
             // 
             this.dtpFechaEmbarque.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dtpFechaEmbarque.CustomFormat = "dd/MMMM/yyyy";
             this.dtpFechaEmbarque.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaEmbarque.Location = new System.Drawing.Point(607, 38);
+            this.dtpFechaEmbarque.Location = new System.Drawing.Point(754, 6);
             this.dtpFechaEmbarque.Name = "dtpFechaEmbarque";
             this.dtpFechaEmbarque.Size = new System.Drawing.Size(200, 26);
             this.dtpFechaEmbarque.TabIndex = 28;
@@ -566,7 +546,7 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(478, 41);
+            this.label9.Location = new System.Drawing.Point(625, 9);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(123, 18);
             this.label9.TabIndex = 21;
@@ -575,7 +555,7 @@
             // txbCliente
             // 
             this.txbCliente.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txbCliente.Location = new System.Drawing.Point(554, 70);
+            this.txbCliente.Location = new System.Drawing.Point(574, 41);
             this.txbCliente.Name = "txbCliente";
             this.txbCliente.Size = new System.Drawing.Size(380, 26);
             this.txbCliente.TabIndex = 30;
@@ -584,7 +564,7 @@
             // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(493, 73);
+            this.label8.Location = new System.Drawing.Point(513, 44);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 18);
             this.label8.TabIndex = 19;
@@ -593,7 +573,7 @@
             // txbPropietario
             // 
             this.txbPropietario.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txbPropietario.Location = new System.Drawing.Point(107, 70);
+            this.txbPropietario.Location = new System.Drawing.Point(105, 38);
             this.txbPropietario.Name = "txbPropietario";
             this.txbPropietario.Size = new System.Drawing.Size(380, 26);
             this.txbPropietario.TabIndex = 29;
@@ -602,7 +582,7 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 73);
+            this.label7.Location = new System.Drawing.Point(19, 41);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 18);
             this.label7.TabIndex = 17;
@@ -612,7 +592,7 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(165, 41);
+            this.label5.Location = new System.Drawing.Point(311, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(102, 18);
             this.label5.TabIndex = 14;
@@ -626,7 +606,7 @@
             this.cmbTipoSalida.Items.AddRange(new object[] {
             "Factura",
             "Traspaso"});
-            this.cmbTipoSalida.Location = new System.Drawing.Point(273, 38);
+            this.cmbTipoSalida.Location = new System.Drawing.Point(419, 6);
             this.cmbTipoSalida.Name = "cmbTipoSalida";
             this.cmbTipoSalida.Size = new System.Drawing.Size(200, 26);
             this.cmbTipoSalida.TabIndex = 27;
@@ -634,7 +614,7 @@
             // txbFolioSalida
             // 
             this.txbFolioSalida.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txbFolioSalida.Location = new System.Drawing.Point(607, 6);
+            this.txbFolioSalida.Location = new System.Drawing.Point(105, 6);
             this.txbFolioSalida.Name = "txbFolioSalida";
             this.txbFolioSalida.Size = new System.Drawing.Size(200, 26);
             this.txbFolioSalida.TabIndex = 26;
@@ -643,7 +623,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(520, 9);
+            this.label4.Location = new System.Drawing.Point(18, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(81, 18);
             this.label4.TabIndex = 11;
@@ -666,10 +646,10 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gridRastreabilidad.DataSource = this.etiquetasGridBindingSource;
-            this.gridRastreabilidad.Location = new System.Drawing.Point(9, 102);
+            this.gridRastreabilidad.Location = new System.Drawing.Point(9, 73);
             this.gridRastreabilidad.MainView = this.gvRastreabilidad;
             this.gridRastreabilidad.Name = "gridRastreabilidad";
-            this.gridRastreabilidad.Size = new System.Drawing.Size(956, 319);
+            this.gridRastreabilidad.Size = new System.Drawing.Size(956, 348);
             this.gridRastreabilidad.TabIndex = 9;
             this.gridRastreabilidad.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRastreabilidad});
@@ -789,7 +769,7 @@
             this.gvRastreabilidad.GroupCount = 1;
             this.gvRastreabilidad.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Count, "NumeroDeEtiqueta", null, ""),
-            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Cantidad", this.colCantidad1, "")});
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Cantidad", this.colCantidad1, "{0:#,0.00}")});
             this.gvRastreabilidad.Name = "gvRastreabilidad";
             this.gvRastreabilidad.OptionsBehavior.Editable = false;
             this.gvRastreabilidad.OptionsView.EnableAppearanceEvenRow = true;
@@ -937,8 +917,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colFechaDeEmpaque1;
         private DevExpress.XtraGrid.Columns.GridColumn colCantidad1;
         private DevExpress.XtraGrid.Columns.GridColumn colUnidad1;
-        private System.Windows.Forms.TextBox txbFolioCompra;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dtpFechaEmbarque;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txbCliente;

@@ -25,7 +25,6 @@ namespace SelectivasEnSucursales.GUIs
         private List<SegConService.EtiquetasGrid> lstEtiquetasACC;
         private List<WebServiceFriolala.EtiquetasGrid> lstEtiquetasFriolala;
         
-
         // Creando componentes de impresión.
         PrintingSystem SistemaImpresion = new PrintingSystem();
         PrintableComponentLink ComponenteImpresion = new PrintableComponentLink();
@@ -124,9 +123,9 @@ namespace SelectivasEnSucursales.GUIs
                 }
                 sError = string.Empty;
             }
-            catch (Exception ex)
+            catch 
             {
-                sError = "Ocurrio un error con el Servicio Web: " + Environment.NewLine + ex.Message;
+                //sError = "Ocurrio un error con el Servicio Web: " + Environment.NewLine + ex.Message;
             }
         }
         private void bgwConsulta_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -135,10 +134,11 @@ namespace SelectivasEnSucursales.GUIs
             {
                 if (bgwConsultaFriolala.IsBusy == false)
                 {
-                    gridEtiquetas.DataSource = lstEtiquetas;
+                    var lstSinDuplicados = QuitarDuplicados(lstEtiquetas);
+                    gridEtiquetas.DataSource = lstSinDuplicados;
                     gvEtiquetas.BestFitColumns();
 
-                    gridRastreabilidad.DataSource = lstEtiquetas;
+                    gridRastreabilidad.DataSource = lstSinDuplicados;
                     gvRastreabilidad.BestFitColumns();
 
                     pbCargando.Visible = false;
@@ -206,10 +206,11 @@ namespace SelectivasEnSucursales.GUIs
             {
                 if (bgwConsulta.IsBusy == false)
                 {
-                    gridEtiquetas.DataSource = lstEtiquetas;
+                    var lstSinDuplicados = QuitarDuplicados(lstEtiquetas);
+                    gridEtiquetas.DataSource = lstSinDuplicados;
                     gvEtiquetas.BestFitColumns();
 
-                    gridRastreabilidad.DataSource = lstEtiquetas;
+                    gridRastreabilidad.DataSource = lstSinDuplicados;
                     gvRastreabilidad.BestFitColumns();
 
                     pbCargando.Visible = false;
@@ -327,6 +328,7 @@ namespace SelectivasEnSucursales.GUIs
         private void IniciarControles()
         {
             cmbTipoSalida.SelectedIndex = 0;
+            sError = string.Empty;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -356,7 +358,6 @@ namespace SelectivasEnSucursales.GUIs
                     traza = new trazabilidad();
                     traza.numero_etiqueta = e.NumeroDeEtiqueta;
                     traza.folio_salida = txbFolioSalida.Text.ToUpper();
-                    traza.folio_compra = txbFolioCompra.Text.ToUpper();
                     traza.tipo_salida = cmbTipoSalida.SelectedItem.ToString().ToUpper();
                     traza.fecha_embarque = dtpFechaEmbarque.Value;
                     traza.propietario = txbPropietario.Text.ToUpper();
@@ -429,6 +430,28 @@ namespace SelectivasEnSucursales.GUIs
             }
 
             MessageBox.Show(sb.ToString(), exType, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private List<Etiqueta> QuitarDuplicados(List<Etiqueta> lstTodasLasEtiquetas)
+        {
+            List<Etiqueta> lstSinDuplicados = new List<Etiqueta>();
+
+            foreach (Etiqueta etiqueta in lstTodasLasEtiquetas)
+            {
+                int CountEtiqueta = lstTodasLasEtiquetas.FindAll(o => o.NumeroDeEtiqueta == etiqueta.NumeroDeEtiqueta).Count;
+                if (CountEtiqueta >= 1)
+                {
+                    if (etiqueta.IdPedido == null)
+                    {
+                        continue;
+                    }
+                }
+
+                var EtiquetaSinDuplicado = lstTodasLasEtiquetas.FirstOrDefault(o => o.NumeroDeEtiqueta == etiqueta.NumeroDeEtiqueta && o.IdPedido == etiqueta.IdPedido);
+                lstSinDuplicados.Add(EtiquetaSinDuplicado);
+            }
+
+            return lstSinDuplicados;
         }
     }
 }
